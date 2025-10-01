@@ -10,6 +10,7 @@ import WindowContent from "./components/WindowContent";
 
 import useTheme from './Hooks/useTheme'
 import Taskbar from "./components/Taskbar";
+
 export default function PortfolioOS() {
   const [windows, setWindows] = React.useState([]);
   const [topZIndex, setTopZIndex] = React.useState(50);
@@ -92,15 +93,73 @@ export default function PortfolioOS() {
         </div>
       </div>
 
-      {/* Desktop Icons */}
-      <div className="absolute top-8 left-8 flex lg:flex-col flex-wrap gap-6 z-10">
+      {/* Hero Introduction */}
+ {/* Hero Introduction */}
+      <div className="absolute top-[20%] md:top-[25%] left-1/2 -translate-x-1/2 z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.h1 
+            className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-3 md:mb-4 tracking-tight ${isDark ? 'text-white' : 'text-black'}`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            Adeoluwa Adegoke
+          </motion.h1>
+          <motion.div 
+            className={`text-base sm:text-lg md:text-xl lg:text-2xl font-semibold ${isDark ? 'text-neutral-400' : 'text-neutral-600'} mb-3 md:mb-4 flex flex-wrap items-center justify-center gap-2`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <span className={`${isDark ? 'text-blue-400' : 'text-blue-600'}`}>Full-Stack Developer</span>
+            <span className="hidden sm:inline">•</span>
+            <span>Building Interactive Experiences</span>
+          </motion.div>
+          <motion.p 
+            className={`text-xs sm:text-sm md:text-base lg:text-lg ${isDark ? 'text-neutral-500' : 'text-neutral-500'} max-w-2xl mx-auto mb-6 md:mb-8`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            Click an icon to explore my work
+          </motion.p>
+        </motion.div>
+
+        {/* Desktop Icons - Mobile Horizontal Layout */}
+        <motion.div 
+          className="flex flex-row lg:hidden justify-center items-center gap-3 sm:gap-4 md:gap-6 mt-8 flex-wrap max-w-xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <DesktopIcon label="About Me" icon={User} onClick={() => openWindow("About Me")} isDark={isDark} />
+          <DesktopIcon label="Projects" icon={Folder} onClick={() => openWindow("Projects")} isDark={isDark} />
+          <DesktopIcon label="Skills" icon={Code} onClick={() => openWindow("Skills")} isDark={isDark} />
+          <DesktopIcon label="Experience" icon={Briefcase} onClick={() => openWindow("Experience")} isDark={isDark} />
+          <DesktopIcon label="Resume" icon={FileText} onClick={() => openWindow("Resume")} isDark={isDark} />
+          <DesktopIcon label="Contact" icon={Mail} onClick={() => openWindow("Contact")} isDark={isDark} />
+        </motion.div>
+      </div>
+
+      {/* Desktop Icons - Desktop Vertical Layout */}
+      <motion.div 
+        className="hidden lg:flex absolute top-8 left-8 flex-col gap-6 z-10"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         <DesktopIcon label="About Me" icon={User} onClick={() => openWindow("About Me")} isDark={isDark} />
         <DesktopIcon label="Projects" icon={Folder} onClick={() => openWindow("Projects")} isDark={isDark} />
         <DesktopIcon label="Skills" icon={Code} onClick={() => openWindow("Skills")} isDark={isDark} />
         <DesktopIcon label="Experience" icon={Briefcase} onClick={() => openWindow("Experience")} isDark={isDark} />
         <DesktopIcon label="Resume" icon={FileText} onClick={() => openWindow("Resume")} isDark={isDark} />
         <DesktopIcon label="Contact" icon={Mail} onClick={() => openWindow("Contact")} isDark={isDark} />
-      </div>
+      </motion.div>
+  
 
       {/* Windows */}
       <AnimatePresence>
@@ -123,8 +182,10 @@ export default function PortfolioOS() {
           </Window>
         ))}
       </AnimatePresence>
-
-    <Taskbar isDark={isDark} toggleTheme={toggleTheme}/>
+     <div className="absolute bottom-0">
+   <Taskbar  isDark={isDark} toggleTheme={toggleTheme}/>
+     </div>
+ 
     </div>
   );
 }
