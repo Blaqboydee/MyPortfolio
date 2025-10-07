@@ -37,38 +37,51 @@ export default function PortfolioOS() {
     setTopZIndex(topZIndex + 1);
   };
 
-  const projects = [
-    {
-      title: "Zaptalk",
-      description: "A cinema website for discovering films based on your mood with personalized recommendations.",
-      tech: ["React", "API", "Tailwind"],
-      link: "#"
-    },
-    {
-      title: "Spendly",
-      description: "A sleek, functional calculator with advanced operations and beautiful UI.",
-      tech: ["JavaScript", "CSS", "HTML"],
-      link: "#"
-    },
-    {
-      title: "Moviemood",
-      description: "Full-featured streaming platform clone with authentication and video browsing.",
-      tech: ["React", "Firebase", "TMDB API"],
-      link: "#"
-    },
-    {
-      title: "Task Manager",
-      description: "Productivity app for managing tasks with drag-and-drop functionality.",
-      tech: ["React", "Local Storage", "Framer Motion"],
-      link: "#"
-    }
-  ];
+const projects = [
+  {
+    title: "Zaptalk",
+    description:
+      "A full-stack real-time chat application with one-on-one and group messaging, edit/delete features, typing indicators, and online status updates — all powered by Socket.io.",
+    tech: ["React", "Node.js", "Express.js", "MongoDB", "Socket.io", "Tailwind CSS"],
+    link: "https://zaptalk-frontend.vercel.app/"
+  },
+  {
+    title: "Spendly",
+    description:
+      "A smart personal finance tracker built with React, featuring expense visualization using Recharts, data persistence with local storage, and intuitive category-based insights.",
+    tech: ["React", "Tailwind CSS", "Recharts", "Local Storage"],
+    link: "https://spendlytracks.vercel.app/"
+  },
+  {
+    title: "Moviemood",
+    description:
+      "A full-stack cinema web app with user and admin sides, movie scheduling, seat booking (200 seats), payments, food ordering, and email verification — built using the MERN stack.",
+    tech: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Nodemailer"],
+    link: "https://moviemoodcinema.vercel.app/"
+  }
+];
 
-  const skills = [
-    "React", "JavaScript", "TypeScript", "Node.js", 
-    "Tailwind CSS", "HTML/CSS", "Git", "REST APIs",
-    "Framer Motion", "Responsive Design"
-  ];
+
+ const skills = [
+  "React",
+  "JavaScript",
+  "TypeScript",
+  "Node.js",
+  "Express.js",
+  "MongoDB",
+  "Tailwind CSS",
+  "HTML/CSS",
+  "Git & GitHub",
+  "REST APIs",
+  "Firebase",
+  "Nodemailer",
+  "Framer Motion",
+  "Responsive Design",
+  "Authentication & Authorization",
+  "API Integration",
+  "UI/UX Implementation"
+];
+
 
   const getIcon = (title) => {
     switch(title) {
