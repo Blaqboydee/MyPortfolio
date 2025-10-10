@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Window({
   title,
@@ -9,6 +10,7 @@ export default function Window({
   children,
   zIndex = 50,
   onFocus,
+  toggleTheme,
   isDark = false,
 }) {
   const [position, setPosition] = React.useState({ x: 120, y: 80 });
@@ -104,6 +106,11 @@ export default function Window({
                 <span className={`font-semibold ${isDark ? "text-white" : "text-black"}`}>{title}</span>
               </div>
 
+              <div className="flex items-center gap-2 ml-48">
+                <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
+              </div>
+
+              
               <button
                 onClick={onClose}
                 className={`p-2 -mr-2 rounded-lg ${

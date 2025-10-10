@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun, Mail, User, Folder, Code, Briefcase, FileText } from "lucide-react";
 import DesktopIcon from "./components/DesktopIcon"
 import ProjectCard from "./components/ProjectCard";
-import {SkillBadge} from "./components/SkillBadge";
+import {SkillBadge} from "./components/SkillsSection";
 import Window from "./components/Window";
 import WindowContent from "./components/WindowContent";
 
@@ -62,29 +62,7 @@ const projects = [
 ];
 
 
-const skills = [
-  "React",
-  "Next.js",
-  "JavaScript",
-  "TypeScript",
-  "Node.js",
-  "Express.js",
-  "MongoDB",
-  "Tailwind CSS",
-  "HTML",
-  "CSS",
-  "Git",
-  "GitHub",
-  "REST APIs",
-  "GraphQL",
-  "Firebase",
-  "Nodemailer",
-  "Framer Motion",
-  "Responsive Design",
-  "Authentication & Authorization",
-  "API Integration",
-  "UI/UX Implementation"
-];
+
 
   const getIcon = (title) => {
     switch(title) {
@@ -152,16 +130,16 @@ const skills = [
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <DesktopIcon label="About Me" icon={User} onClick={() => openWindow("About Me")} isDark={isDark} />
-          <DesktopIcon label="Projects" icon={Folder} onClick={() => openWindow("Projects")} isDark={isDark} />
-          <DesktopIcon label="Skills" icon={Code} onClick={() => openWindow("Skills")} isDark={isDark} />
-          <DesktopIcon label="Experience" icon={Briefcase} onClick={() => openWindow("Experience")} isDark={isDark} />
-          <DesktopIcon label="Resume" icon={FileText} onClick={() => openWindow("Resume")} isDark={isDark} />
-          <DesktopIcon label="Contact" icon={Mail} onClick={() => openWindow("Contact")} isDark={isDark} />
+          <DesktopIcon label="About Me" icon={User} onClick={() => openWindow("About Me")} isDark={isDark} toggleTheme={toggleTheme} />
+          <DesktopIcon label="Projects" icon={Folder} onClick={() => openWindow("Projects")} isDark={isDark} toggleTheme={toggleTheme} />
+          <DesktopIcon label="Skills" icon={Code} onClick={() => openWindow("Skills")} isDark={isDark} toggleTheme={toggleTheme} />
+          <DesktopIcon label="Experience" icon={Briefcase} onClick={() => openWindow("Experience")} isDark={isDark} toggleTheme={toggleTheme} />
+          <DesktopIcon label="Resume" icon={FileText} onClick={() => openWindow("Resume")} isDark={isDark} toggleTheme={toggleTheme} />
+          <DesktopIcon label="Contact" icon={Mail} onClick={() => openWindow("Contact")} isDark={isDark} toggleTheme={toggleTheme} />
         </motion.div>
       </div>
 
-      {/* Desktop Icons - Desktop Vertical Layout */}
+      {/* Desktop Icons - Desktop horizontal Layout */}
       <motion.div 
         className="hidden lg:flex absolute top-[45%] left-8 gap-6 z-10 w-[97%] px-6 py-4 justify-center items-center shadow-lg"
         initial={{ opacity: 0, x: -20 }}
@@ -188,12 +166,12 @@ const skills = [
             zIndex={win.zIndex}
             onFocus={() => focusWindow(win.title)}
             isDark={isDark}
+            toggleTheme={toggleTheme}
           >
             <WindowContent 
               title={win.title} 
               isDark={isDark}
               projects={projects}
-              skills={skills}
             />
           </Window>
         ))}

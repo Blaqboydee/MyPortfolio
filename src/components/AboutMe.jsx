@@ -3,7 +3,7 @@ import { Wrench, MapPin, Compass, User, Rocket } from "lucide-react";
 
 export default function AboutMe({ isDark, mypicture }) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       {/* Header with Profile */}
       <div className="flex items-start gap-8 pb-8 border-b border-neutral-800">
         <div className="flex-1 space-y-3">
@@ -11,11 +11,11 @@ export default function AboutMe({ isDark, mypicture }) {
             <p className={`text-sm font-medium ${isDark ? "text-neutral-400" : "text-neutral-600"} mb-1`}>
               Hello, I'm
             </p>
-            <h1 className="text-4xl font-bold tracking-tight">
+            <h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
               Adeoluwa Adegoke
             </h1>
           </div>
-          <p className={`text-lg ${isDark ? "text-neutral-300" : "text-neutral-700"}`}>
+          <p className={`lg:text-lg ${isDark ? "text-neutral-300" : "text-neutral-700"}`}>
             Full-stack Developer
           </p>
         </div>
@@ -30,7 +30,7 @@ export default function AboutMe({ isDark, mypicture }) {
 
       {/* Intro */}
       <div className="space-y-4">
-        <p className={`text-lg leading-relaxed ${isDark ? "text-neutral-300" : "text-neutral-700"}`}>
+        <p className={`lg:text-lg leading-relaxed ${isDark ? "text-neutral-300" : "text-neutral-700"}`}>
           I'm a Full-stack web developer passionate about building interactive,
           user-first digital experiences. With a balance of frontend design and
           backend logic, I create applications that are both beautiful and
