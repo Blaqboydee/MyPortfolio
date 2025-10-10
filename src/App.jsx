@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun, Mail, User, Folder, Code, Briefcase, FileText } from "lucide-react";
 import DesktopIcon from "./components/DesktopIcon"
 import ProjectCard from "./components/ProjectCard";
-import SkillBadge from "./components/SkillBadge";
+import {SkillBadge} from "./components/SkillBadge";
 import Window from "./components/Window";
 import WindowContent from "./components/WindowContent";
 
@@ -62,17 +62,21 @@ const projects = [
 ];
 
 
- const skills = [
+const skills = [
   "React",
+  "Next.js",
   "JavaScript",
   "TypeScript",
   "Node.js",
   "Express.js",
   "MongoDB",
   "Tailwind CSS",
-  "HTML/CSS",
-  "Git & GitHub",
+  "HTML",
+  "CSS",
+  "Git",
+  "GitHub",
   "REST APIs",
+  "GraphQL",
   "Firebase",
   "Nodemailer",
   "Framer Motion",
@@ -81,7 +85,6 @@ const projects = [
   "API Integration",
   "UI/UX Implementation"
 ];
-
 
   const getIcon = (title) => {
     switch(title) {
@@ -108,7 +111,7 @@ const projects = [
 
       {/* Hero Introduction */}
  {/* Hero Introduction */}
-      <div className="absolute top-[20%] md:top-[25%] left-1/2 -translate-x-1/2 z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
+      <div className="absolute top-[20%] md:top-[20%] left-1/2 -translate-x-1/2 z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -160,7 +163,7 @@ const projects = [
 
       {/* Desktop Icons - Desktop Vertical Layout */}
       <motion.div 
-        className="hidden lg:flex absolute top-8 left-8 flex-col gap-6 z-10"
+        className="hidden lg:flex absolute top-[45%] left-8 gap-6 z-10 w-[97%] px-6 py-4 justify-center items-center shadow-lg"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}

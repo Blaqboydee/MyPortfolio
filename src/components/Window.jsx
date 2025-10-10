@@ -13,6 +13,29 @@ export default function Window({
 }) {
   const [position, setPosition] = React.useState({ x: 120, y: 80 });
   const [isMobile, setIsMobile] = React.useState(false);
+  const [isMaximized, setIsMaximized] = React.useState(false);
+
+  React.useEffect(() => {
+    // Add global style for custom scrollbar
+    const style = document.createElement('style');
+    style.textContent = `
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: ${isDark ? '#171717' : '#f5f5f5'};
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: ${isDark ? '#404040' : '#d4d4d4'};
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: ${isDark ? '#525252' : '#a3a3a3'};
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, [isDark]);
 
   React.useEffect(() => {
     const checkMobile = () => {
@@ -114,10 +137,11 @@ export default function Window({
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className={`absolute ${isDark ? "bg-neutral-900" : "bg-white"} shadow-2xl rounded-lg overflow-hidden`}
           style={{
-            top: `${position.y}px`,
-            left: `${position.x}px`,
-            width: "500px",
-            maxHeight: "600px",
+            top: isMaximized ? "0" : `${position.y}px`,
+            left: isMaximized ? "0" : `${position.x}px`,
+            width: isMaximized ? "100vw" : "500px",
+            maxHeight: isMaximized ? "100vh" : "600px",
+            height: isMaximized ? "100vh" : "auto",
             zIndex,
           }}
           onMouseDown={onFocus}
@@ -147,6 +171,7 @@ export default function Window({
                 title="Minimize"
               />
               <button
+                onClick={() => setIsMaximized(!isMaximized)}
                 className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors"
                 aria-label="Maximize"
                 title="Maximize"
@@ -154,7 +179,14 @@ export default function Window({
             </div>
           </div>
 
-          <div className={`p-6 overflow-auto ${isDark ? "text-neutral-200" : "text-neutral-800"}`} style={{ maxHeight: "540px" }}>
+          <div 
+            className={`${isMaximized ? "p-12 max-w-4xl mx-auto" : "p-6"} overflow-auto custom-scrollbar ${isDark ? "text-neutral-200" : "text-neutral-800"}`} 
+            style={{ 
+              maxHeight: isMaximized ? "calc(100vh - 57px)" : "540px",
+              scrollbarWidth: "thin",
+              scrollbarColor: isDark ? "#404040 #171717" : "#d4d4d4 #f5f5f5"
+            }}
+          >
             {children}
           </div>
         </motion.div>
