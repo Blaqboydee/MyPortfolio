@@ -26,7 +26,7 @@ const resumeRef = useRef();
         isDark ? "bg-neutral-900 text-white" : "bg-white text-black"
       }`}
     >
-      <h1 className="text-3xl font-bold mb-6">Dee Adegoke — Full Stack Developer</h1>
+      <h1 className="text-2xl lg:text-3xl font-bold mb-6">Adeoluwa Adegoke — Full Stack Developer</h1>
 
       <div className="mb-6 text-sm">
         <p><strong>Email:</strong> adeoluwaadegoke05@gmail.com</p>
@@ -46,7 +46,7 @@ const resumeRef = useRef();
 
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-2">Profile</h2>
-        <p className="leading-relaxed">
+        <p className="text-sm lg:text-base leading-relaxed">
           Full-stack developer passionate about building responsive, performant, and
           user-centered applications. Skilled in developing both frontend and backend
           solutions using the MERN stack. Dedicated to crafting smooth user experiences,
@@ -57,7 +57,7 @@ const resumeRef = useRef();
 
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-2">Education</h2>
-        <p>
+        <p className="text-sm lg:text-base">
           <strong>Federal University of Agriculture, Abeokuta (FUNAAB)</strong> — B.Eng.
           Agricultural and Bio-Resources Engineering, Second Class Upper (2024)
         </p>
@@ -65,7 +65,7 @@ const resumeRef = useRef();
 
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-2">Technical Skills</h2>
-        <p>
+        <p className="text-sm lg:text-base">
           <strong>Frontend:</strong> React, Tailwind CSS, JavaScript, TypeScript, HTML/CSS, Framer Motion<br />
           <strong>Backend:</strong> Node.js, Express.js, MongoDB<br />
           <strong>Others:</strong> Git, REST APIs, Firebase, Recharts, Local Storage, Socket.io, Nodemailer
@@ -154,7 +154,7 @@ const resumeRef = useRef();
 
       <section>
         <h2 className="text-xl font-semibold mb-2">Vision</h2>
-        <p className="leading-relaxed">
+        <p className="text-sm lg:text-base leading-relaxed">
           To become a highly skilled full-stack engineer capable of building impactful,
           scalable web applications and inspiring the next generation of young
           developers through tech education.

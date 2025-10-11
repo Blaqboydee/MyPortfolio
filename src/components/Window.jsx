@@ -109,17 +109,6 @@ export default function Window({
               <div className="flex items-center gap-2 ml-48">
                 <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
               </div>
-
-              
-              <button
-                onClick={onClose}
-                className={`p-2 -mr-2 rounded-lg ${
-                  isDark ? "hover:bg-neutral-800" : "hover:bg-neutral-100"
-                } transition-colors`}
-                aria-label="Close"
-              >
-                <X size={24} className={isDark ? "text-white" : "text-black"} />
-              </button>
             </div>
 
             {/* Mobile App Content */}

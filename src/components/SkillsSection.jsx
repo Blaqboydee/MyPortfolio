@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import {
   SiReact,
   SiNextdotjs,
@@ -29,6 +30,7 @@ import { FaServer } from 'react-icons/fa';
 import { BiCodeBlock } from 'react-icons/bi';
 import { MdEmail, MdDevices, MdSecurity, MdIntegrationInstructions } from 'react-icons/md';
 import { AiOutlineBgColors } from 'react-icons/ai';
+
 
 // SINGLE SOURCE OF TRUTH FOR ALL SKILLS
 const skillsData = {
@@ -99,32 +101,45 @@ const SkillBadge = ({ skill, isDark }) => {
   );
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.3 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
 // Skills Section Component
 const SkillsSection = ({ isDark }) => {
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Technical Skills</h2>
-      <p
-        className={`mb-6 ${isDark ? "text-neutral-400" : "text-neutral-600"}`}
+    <motion.div variants={containerVariants} initial="hidden" animate="visible" className="">
+      <motion.h2 variants={itemVariants} className="text-2xl font-bold mb-4">Technical Skills</motion.h2>
+      <motion.p
+        variants={itemVariants} className={`mb-6 ${isDark ? "text-neutral-400" : "text-neutral-600"}`}
       >
         Technologies and tools I work with:
-      </p>
-      <div className="flex flex-wrap gap-3">
+      </motion.p>
+      <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
         {skillsData.mainSkills.map((skill, i) => (
           <SkillBadge key={i} skill={skill} isDark={isDark} />
         ))}
-      </div>
-      <div className="mt-8">
-        <h3 className="text-lg font-semibold mb-3">Currently Learning</h3>
-        <div className="flex flex-wrap gap-3">
+      </motion.div>
+      <motion.div variants={containerVariants} className="mt-8">
+        <motion.h3 variants={itemVariants} className="text-lg font-semibold mb-3">Currently Learning</motion.h3>
+        <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
           {skillsData.currentlyLearning.map((skill, i) => (
             <SkillBadge key={i} skill={skill} isDark={isDark} />
           ))}
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 
 export default SkillsSection;
-export { skillsData, SkillBadge };
+export { SkillBadge };

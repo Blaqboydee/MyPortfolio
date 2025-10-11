@@ -134,7 +134,7 @@ const projects = [
           <DesktopIcon label="Projects" icon={Folder} onClick={() => openWindow("Projects")} isDark={isDark} toggleTheme={toggleTheme} />
           <DesktopIcon label="Skills" icon={Code} onClick={() => openWindow("Skills")} isDark={isDark} toggleTheme={toggleTheme} />
           <DesktopIcon label="Experience" icon={Briefcase} onClick={() => openWindow("Experience")} isDark={isDark} toggleTheme={toggleTheme} />
-          <DesktopIcon label="Resume" icon={FileText} onClick={() => openWindow("Resume")} isDark={isDark} toggleTheme={toggleTheme} />
+               <DesktopIcon label="Resume" icon={FileText} onClick={() => window.open("/Adegoke_Adeoluwa_Al-Ameen_CV.pdf", "_blank")} isDark={isDark} toggleTheme={toggleTheme} />
           <DesktopIcon label="Contact" icon={Mail} onClick={() => openWindow("Contact")} isDark={isDark} toggleTheme={toggleTheme} />
         </motion.div>
       </div>
@@ -150,7 +150,9 @@ const projects = [
         <DesktopIcon label="Projects" icon={Folder} onClick={() => openWindow("Projects")} isDark={isDark} />
         <DesktopIcon label="Skills" icon={Code} onClick={() => openWindow("Skills")} isDark={isDark} />
         <DesktopIcon label="Experience" icon={Briefcase} onClick={() => openWindow("Experience")} isDark={isDark} />
-        <DesktopIcon label="Resume" icon={FileText} onClick={() => openWindow("Resume")} isDark={isDark} />
+       <DesktopIcon label="Resume" icon={FileText} onClick={() => window.open("/Adegoke_Adeoluwa_Al-Ameen_CV.pdf", "_blank")} isDark={isDark}
+/>
+
         <DesktopIcon label="Contact" icon={Mail} onClick={() => openWindow("Contact")} isDark={isDark} />
       </motion.div>
   
