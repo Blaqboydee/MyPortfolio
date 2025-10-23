@@ -45,7 +45,7 @@ const Skills = ({ skillsRef }) => {
     : skillsData.filter(skill => skill.category === selectedCategory);
 
   return (
-    <section ref={skillsRef} className="py-32 px-6">
+    <section ref={skillsRef} className="py-9 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -53,7 +53,7 @@ const Skills = ({ skillsRef }) => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-5xl md:text-7xl font-bold mb-16">SKILLS</h2>
+          <h2 className="text-4xl md:text-7xl font-bold mb-10">SKILLS</h2>
 
           {/* Category Filter */}
           <div className="flex flex-wrap gap-3 mb-12">
@@ -90,7 +90,7 @@ const Skills = ({ skillsRef }) => {
                   exit={{ opacity: 0, scale: 0.8 }}
                   whileHover={{ scale: 1.05, y: -5 }}
                   transition={{ duration: 0.4, delay: index * 0.03, ease: [0.22, 1, 0.36, 1] }}
-                  className="aspect-square bg-gray-50 hover:bg-black hover:text-white transition-all duration-300 group cursor-pointer flex flex-col items-center justify-center p-6"
+                  className="lg:aspect-square bg-gray-50 hover:bg-black hover:text-white transition-all duration-300 group cursor-pointer flex flex-col items-center justify-center p-6"
                 >
                   <skill.icon className="text-4xl mb-4 transition-transform group-hover:scale-110" />
                   <p className="text-sm font-medium text-center">{skill.name}</p>

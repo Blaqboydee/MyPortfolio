@@ -37,7 +37,7 @@ const Experience = ({ experienceRef }) => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-5xl md:text-7xl font-bold mb-16">EXPERIENCE</h2>
+          <h2 className="text-4xl md:text-7xl font-bold mb-16">EXPERIENCE</h2>
 
           <div className="space-y-16">
             {experiencesData.map(({ Icon, title, company, period, description }, i) => (
@@ -57,11 +57,11 @@ const Experience = ({ experienceRef }) => {
                     <Icon size={24} className="text-white" />
                   </motion.div>
                   <div>
-                    <h3 className="text-2xl font-bold">{title}</h3>
+                    <h3 className="text-xl font-bold">{title}</h3>
                     <p className="text-gray-600 font-medium">{company} • {period}</p>
                   </div>
                 </div>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                <p className="text-sm md:text-lg text-gray-700 leading-relaxed">
                   {description}
                 </p>
               </motion.div>

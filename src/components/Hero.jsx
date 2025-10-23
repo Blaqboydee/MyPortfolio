@@ -25,7 +25,7 @@ export default function Hero({ heroRef, scrollToSection, projectsRef, contactRef
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
-            className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter leading-none"
+            className="text-5xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter leading-none"
           >
             ADEOLUWA
             <br />
@@ -38,7 +38,7 @@ export default function Hero({ heroRef, scrollToSection, projectsRef, contactRef
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
-            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-base lg:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
             Crafting seamless digital experiences with the MERN stack.
             Building applications that are beautiful, performant, and user-centered.

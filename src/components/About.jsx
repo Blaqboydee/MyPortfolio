@@ -25,7 +25,7 @@ export default function About({ aboutRef }) {
   };
 
   return (
-    <section ref={aboutRef} className="py-32 px-6 bg-gray-50">
+    <section ref={aboutRef} className="py-9 px-6 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -35,7 +35,7 @@ export default function About({ aboutRef }) {
         >
           <motion.h2 
             variants={itemVariants}
-            className="text-5xl md:text-7xl font-black mb-20 tracking-tight"
+            className="text-3xl md:text-7xl font-black mb-10 tracking-tight"
           >
             ABOUT ME
           </motion.h2>
@@ -55,12 +55,12 @@ export default function About({ aboutRef }) {
               </div>
             </motion.div>
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               <motion.p 
                 variants={itemVariants}
                 className="text-base md:text-lg text-gray-700 leading-relaxed"
               >
-                I'm a <span className="font-bold text-black">full-stack developer</span> passionate about building interactive,
+                I'm a <span className="font-bold text-black">Full-stack developer</span> passionate about building interactive,
                 user-first digital experiences. With a balance of frontend design and
                 backend logic, I create applications that are both beautiful and
                 performant.
