@@ -5,7 +5,7 @@ import edenville from '../assets/edenville.jpg';
 import zapTalk from '../assets/zaptalk.jpg';
 import movieMood from '../assets/moviemood.jpg';
 import spendly from '../assets/spendly.jpg';
-import myCinema from '../assets/mycinema.jpg';
+import myCinema from '../assets/myCinema.jpg';
 import { ExternalLink } from 'lucide-react';
 
 const projectsData = [
