@@ -6,9 +6,19 @@ import zapTalk from '../assets/zaptalk.jpg';
 import movieMood from '../assets/moviemood.jpg';
 import spendly from '../assets/spendly.jpg';
 import myCinema from '../assets/myCinema.jpg';
+import findAmImg from '../assets/image.png';
 import { ExternalLink } from 'lucide-react';
 
 const projectsData = [
+  {
+  title: "FindAm",
+  description: "Early-stage startup MVP for connecting people with reliable local professionals. Features a full provider registration flow, customer search, dynamic routing for profiles, and secure authentication.",
+  tech: ["Next.js", "React", "MongoDB", "Next API Routes", "JWT Authentication"],
+  link: "https://findam.vercel.app/",
+  image: findAmImg,
+  featured: true
+},
+
   {
     title: "Zaptalk",
     description: "Real-time chat application with DMs, group chats, typing indicators, and online presence tracking",
