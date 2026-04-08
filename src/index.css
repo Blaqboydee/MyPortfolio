@@ -2,7 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    scroll-behavior: smooth;
-}
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: #fff; color: #0a0a0a; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+
+  a { color: inherit; }
+}
