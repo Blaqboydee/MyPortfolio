@@ -73,10 +73,10 @@ I started coding in 2022 with HTML and CSS, took a break to focus on university,
 
 ---
 
-### 2. Zaptalk *(Featured)*
+### 2. Ember *(Featured)*
 - **Description:** Real-time chat application with DMs, group chats, typing indicators, and online presence tracking.
 - **Tech:** React, Node.js, Socket.io, MongoDB, Express
-- **Live:** https://zaptalk-frontend.vercel.app/
+- **Live:** https://emberconnect.vercel.app/
 
 ---
 

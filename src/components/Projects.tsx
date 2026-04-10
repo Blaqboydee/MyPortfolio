@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { projects } from "../data/portfolio";
-import zapTalk from "../assets/zaptalk.jpg";
+import ember from "../assets/ember.png";
 import spendly from "../assets/spendly.jpg";
 import movieMood from "../assets/moviemood.jpg";
 import myCinema from "../assets/myCinema.jpg";
@@ -11,7 +11,7 @@ import arena from "../assets/Arena.png";
 const images: Record<string, string> = {
   "01": findAm,
   "02": arena,
-  "03": zapTalk,
+  "03": ember,
   "04": spendly,
   "05": movieMood,
   "06": myCinema,

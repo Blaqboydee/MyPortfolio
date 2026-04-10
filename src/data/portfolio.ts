@@ -46,11 +46,11 @@ export const projects = [
   },
   {
     id: "03",
-    name: "Zaptalk",
+    name: "Ember",
     description:
       "Real-time chat application with DMs, group chats, typing indicators, and online presence tracking.",
     tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-    live: "https://zaptalk-frontend.vercel.app/",
+    live: "https://emberconnect.vercel.app/",
     featured: true,
   },
   {
