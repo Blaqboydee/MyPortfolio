@@ -44,15 +44,15 @@ export const projects = [
     live: "https://arenagameplay.vercel.app/",
     featured: true,
   },
-  {
-    id: "03",
-    name: "Ember",
-    description:
-      "Real-time chat application with DMs, group chats, typing indicators, and online presence tracking.",
-    tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-    live: "https://emberconnect.vercel.app/",
-    featured: true,
-  },
+ {
+  id: "03",
+  name: "Ember",
+  description:
+    "Real-time chat PWA with DMs, group chats, typing indicators, online presence, Google OAuth, and offline support. Installable on iOS and Android.",
+  tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
+  live: "https://emberconnect.vercel.app/",
+  featured: true,
+},
   {
     id: "04",
     name: "Spendly",
