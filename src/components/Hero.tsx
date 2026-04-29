@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { personal } from "../data/portfolio";
+import CVDownloadButton from "./CV";
 
 export default function Hero() {
   const dotRef = useRef<HTMLSpanElement>(null);
@@ -116,6 +117,7 @@ export default function Hero() {
           >
             GitHub →
           </a>
+          <CVDownloadButton />
         </div>
       </div>
     </section>
