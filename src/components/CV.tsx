@@ -9,19 +9,16 @@ import {
   Font,
   pdf,
 } from "@react-pdf/renderer";
-import { personal, skills, projects, experience } from "../data/portfolio";
+import { personal, skills, projects, experience, education } from "../data/portfolio";
 
-// ─── Register Calibri (local system TTF, react-pdf compatible) ───────────────
+// ─── Register Computer Modern ─────────────────────────────────────────────────
 
 Font.register({
-  family: "Calibri",
+  family: "ComputerModern",
   fonts: [
-    { src: "/fonts/calibril.ttf", fontWeight: 300 },
-    { src: "/fonts/calibri.ttf",  fontWeight: 400 },
-    { src: "/fonts/calibri.ttf",  fontWeight: 500 },
-    { src: "/fonts/calibrib.ttf", fontWeight: 600 },
-    { src: "/fonts/calibrib.ttf", fontWeight: 700 },
-    { src: "/fonts/calibrii.ttf", fontWeight: 400, fontStyle: "italic" },
+    { src: "/fonts/cmu-serif-roman.ttf", fontWeight: 400 },
+    { src: "/fonts/cmu-serif-bold.ttf", fontWeight: 700 },
+    { src: "/fonts/cmu-serif-italic.ttf", fontWeight: 400, fontStyle: "italic" },
   ],
 });
 
@@ -29,297 +26,350 @@ Font.registerHyphenationCallback((word) => [word]);
 
 // ─── Tokens ───────────────────────────────────────────────────────────────────
 
-const ACCENT  = "#0f172a";
-const MID     = "#475569";
-const MUTED   = "#94a3b8";
-const LINE    = "#e2e8f0";
-const SIDEBAR = "#f8fafc";
+const DARK  = "#0f172a";
+const MID   = "#374151";
+const MUTED = "#6b7280";
+const LINE  = "#d1d5db";
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const s = StyleSheet.create({
   page: {
-    fontFamily: "Calibri",
+    fontFamily: "ComputerModern",
     fontWeight: 400,
-    fontSize: 9,
-    color: ACCENT,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingHorizontal: 0,
-  },
-
-  // ── Two-column page shell ──
-  body: {
-    flexDirection: "row",
-  },
-  main: {
-    width: "62%",
-    paddingTop: 26,
-    paddingBottom: 26,
-    paddingLeft: 40,
-    paddingRight: 22,
-  },
-  sidebar: {
-    width: "38%",
-    backgroundColor: SIDEBAR,
-    borderLeftWidth: 1,
-    borderLeftColor: LINE,
-    paddingTop: 26,
-    paddingBottom: 26,
-    paddingLeft: 22,
-    paddingRight: 28,
-  },
-
-  // ── Header (spans full width, sits above body columns) ──
-  header: {
-    backgroundColor: ACCENT,
-    paddingTop: 36,
-    paddingBottom: 28,
-    paddingHorizontal: 44,
-    marginBottom: 0,
-  },
-  name: {
-    fontSize: 26,
-    fontWeight: 700,
-    color: "#ffffff",
-    letterSpacing: 0.3,
-    marginBottom: 4,
-  },
-  titleLine: {
     fontSize: 10,
-    fontWeight: 300,
-    color: "#94a3b8",
-    marginBottom: 14,
-    letterSpacing: 0.2,
+    color: DARK,
+    paddingTop: 44,
+    paddingBottom: 44,
+    paddingHorizontal: 52,
+  },
+
+  // ── Header ──
+  headerWrap: {
+    alignItems: "center",
+    marginBottom: 18,
+  },
+  headerName: {
+    fontSize: 22,
+    fontWeight: 700,
+    color: DARK,
+    marginBottom: 4,
+    textAlign: "center",
+  },
+  headerMeta: {
+    fontSize: 9,
+    fontWeight: 400,
+    color: MID,
+    marginBottom: 2,
+    textAlign: "center",
   },
   contactRow: {
     flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
     alignItems: "center",
+    marginTop: 2,
   },
   contactLink: {
-    fontSize: 8,
-    fontWeight: 400,
-    color: "#cbd5e1",
+    fontSize: 9,
+    color: DARK,
     textDecoration: "none",
-    marginRight: 6,
+    marginRight: 4,
   },
   contactSep: {
-    fontSize: 8,
-    color: "#475569",
-    marginRight: 6,
-  },
-
-  divider: {
-    borderBottomWidth: 1,
-    borderBottomColor: LINE,
-    marginBottom: 10,
+    fontSize: 9,
+    color: MUTED,
+    marginRight: 4,
   },
 
   // ── Section ──
-  section: { marginBottom: 12 },
+  section: {
+    marginBottom: 14,
+  },
   sectionTitle: {
-    fontSize: 7,
-    fontWeight: 600,
-    letterSpacing: 1.6,
+    fontSize: 10,
+    fontWeight: 700,
     textTransform: "uppercase",
-    color: MUTED,
+    letterSpacing: 0.8,
+    color: DARK,
+    marginBottom: 3,
+  },
+  divider: {
+    borderBottomWidth: 1,
+    borderBottomColor: LINE,
     marginBottom: 8,
   },
 
-  // ── Experience ──
-  expItem: { marginBottom: 8 },
-  expTopRow: {
+  // ── Education ──
+  eduItem: {
+    marginBottom: 7,
+  },
+  eduTopRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 1,
+    alignItems: "flex-start",
   },
-  expRole: {
-    fontSize: 9,
-    fontWeight: 600,
+  eduLeft: {
     flex: 1,
     paddingRight: 8,
   },
-  expPeriod: {
-    fontSize: 7.5,
+  eduInstitution: {
+    fontSize: 9.5,
+    fontWeight: 700,
+    color: DARK,
+  },
+  eduDegree: {
+    fontSize: 9,
     fontWeight: 400,
-    color: MUTED,
+    color: MID,
+    marginTop: 1,
+  },
+  eduRight: {
+    alignItems: "flex-end",
     flexShrink: 0,
   },
-  expOrg: {
-    fontSize: 8,
-    fontWeight: 500,
+  eduLocation: {
+    fontSize: 9,
+    fontWeight: 400,
     color: MID,
-    marginBottom: 2,
+  },
+  eduPeriod: {
+    fontSize: 9,
+    fontWeight: 400,
+    color: MUTED,
+    marginTop: 1,
+  },
+
+  // ── Experience ──
+  expItem: {
+    marginBottom: 9,
+  },
+  expTopRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+  expLeft: {
+    flex: 1,
+    paddingRight: 8,
+  },
+  expOrg: {
+    fontSize: 9.5,
+    fontWeight: 700,
+    color: DARK,
+  },
+  expRole: {
+    fontSize: 9,
+    fontWeight: 400,
+    fontStyle: "italic",
+    color: MID,
+    marginTop: 1,
+  },
+  expRight: {
+    alignItems: "flex-end",
+    flexShrink: 0,
+  },
+  expPeriod: {
+    fontSize: 9,
+    fontWeight: 400,
+    color: MUTED,
+  },
+  expLocation: {
+    fontSize: 9,
+    fontWeight: 400,
+    color: MID,
+    marginBottom: 1,
+  },
+  expBullet: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginTop: 3,
+  },
+  expBulletDot: {
+    fontSize: 9,
+    color: MID,
+    width: 10,
   },
   expDesc: {
-    fontSize: 8,
-    fontWeight: 300,
+    fontSize: 9,
+    fontWeight: 600,
     color: MID,
-    lineHeight: 1.45,
+    lineHeight: 1.55,
+    flex: 1,
   },
 
   // ── Projects ──
-  projItem: { marginBottom: 9 },
+  projItem: {
+    marginBottom: 8,
+  },
   projTopRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    marginBottom: 1,
   },
   projName: {
-    fontSize: 9,
-    fontWeight: 600,
+    fontSize: 9.5,
+    fontWeight: 700,
+    color: DARK,
     flex: 1,
     paddingRight: 8,
   },
   projLink: {
-    fontSize: 7,
+    fontSize: 8.5,
     fontWeight: 400,
     color: MUTED,
     textDecoration: "none",
     flexShrink: 0,
   },
   projDesc: {
-    fontSize: 8,
-    fontWeight: 300,
+    fontSize: 9,
+    fontWeight: 600,
     color: MID,
-    lineHeight: 1.45,
-    marginBottom: 4,
+    lineHeight: 1.55,
+    marginTop: 2,
+    marginBottom: 3,
   },
   tagRow: {
     flexDirection: "row",
     flexWrap: "wrap",
   },
   tag: {
-    fontSize: 7,
-    fontWeight: 400,
+    fontSize: 8,
+    fontWeight: 500,
     color: MUTED,
-    borderWidth: 1,
-    borderColor: LINE,
-    paddingHorizontal: 4,
-    paddingVertical: 1,
-    borderRadius: 3,
-    marginRight: 3,
-    marginBottom: 2,
+    marginRight: 6,
   },
 
-  // ── Sidebar: Skills ──
-  skillGroup: { marginBottom: 8 },
-  skillLabel: {
-    fontSize: 8,
-    fontWeight: 600,
-    color: ACCENT,
-    marginBottom: 2,
+  // ── Skills ──
+  skillRow: {
+    flexDirection: "row",
+    marginBottom: 4,
+  },
+  skillCategory: {
+    fontSize: 9,
+    fontWeight: 700,
+    color: DARK,
+    width: 72,
+    flexShrink: 0,
   },
   skillList: {
-    fontSize: 8,
-    fontWeight: 300,
+    fontSize: 9,
+    fontWeight: 600,
     color: MID,
-    lineHeight: 1.45,
-  },
-
-  // ── Sidebar: About ──
-  aboutText: {
-    fontSize: 8,
-    fontWeight: 300,
-    color: MID,
+    flex: 1,
     lineHeight: 1.5,
-    marginBottom: 5,
   },
 });
 
-// ─── Document ─────────────────────────────────────────────────────────────────
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const featuredProjects = projects.filter((p) => p.featured);
+
+const getExperienceDetails = (job: { details?: string[]; desc: string }) => {
+  if (Array.isArray(job.details) && job.details.length > 0) {
+    return job.details;
+  }
+
+  return [job.desc];
+};
+
+// ─── Document ─────────────────────────────────────────────────────────────────
 
 const CVDocument = () => (
   <Document title={`${personal.name} — CV`} author={personal.name}>
     <Page size="A4" style={s.page}>
 
-      {/* ── Dark header banner ─────────────────── */}
-      <View style={s.header}>
-        <Text style={s.name}>{personal.name}</Text>
-        <Text style={s.titleLine}>{personal.title}  ·  {personal.location}</Text>
+      {/* ── Header ── */}
+      <View style={s.headerWrap}>
+        <Text style={s.headerName}>{personal.name.toUpperCase()}</Text>
+        <Text style={s.headerMeta}>{personal.location}</Text>
         <View style={s.contactRow}>
           <Link src={`mailto:${personal.email}`} style={s.contactLink}>{personal.email}</Link>
+          <Text style={s.contactSep}>·</Text>
+          <Text style={s.contactLink}>{personal.whatsapp}</Text>
           <Text style={s.contactSep}>·</Text>
           <Link src={personal.github} style={s.contactLink}>github.com/Blaqboydee</Link>
           <Text style={s.contactSep}>·</Text>
           <Link src={personal.linkedin} style={s.contactLink}>LinkedIn</Link>
-          <Text style={s.contactSep}>·</Text>
-          <Text style={{ ...s.contactLink, textDecoration: "none" }}>{personal.whatsapp}</Text>
         </View>
       </View>
 
-      {/* ── Body: main + sidebar ───────────────── */}
-      <View style={s.body}>
+      {/* ── Education ── */}
+      <Text style={s.sectionTitle}>Education</Text>
+      <View style={s.divider} />
+      <View style={s.section}>
+        {education.map((edu, i) => (
+          <View key={i} style={s.eduItem}>
+            <View style={s.eduTopRow}>
+              <View style={s.eduLeft}>
+                <Text style={s.eduInstitution}>{edu.institution}</Text>
+                <Text style={s.eduDegree}>{edu.degree}</Text>
+              </View>
+              <View style={s.eduRight}>
+                <Text style={s.eduLocation}>{edu.location}</Text>
+                <Text style={s.eduPeriod}>{edu.period}</Text>
+              </View>
+            </View>
+          </View>
+        ))}
+      </View>
 
-        {/* Main column */}
-        <View style={s.main}>
-
-          {/* Experience */}
-          <View style={s.section}>
-            <Text style={s.sectionTitle}>Experience</Text>
-            <View style={s.divider} />
-            {experience.map((job, i) => (
-              <View key={i} style={s.expItem}>
-                <View style={s.expTopRow}>
-                  <Text style={s.expRole}>{job.role}</Text>
-                  <Text style={s.expPeriod}>{job.period}</Text>
-                </View>
+      {/* ── Experience ── */}
+      <Text style={s.sectionTitle}>Work Experience</Text>
+      <View style={s.divider} />
+      <View style={s.section}>
+        {experience.map((job, i) => (
+          <View key={i} style={s.expItem}>
+            <View style={s.expTopRow}>
+              <View style={s.expLeft}>
                 <Text style={s.expOrg}>{job.org}</Text>
-                <Text style={s.expDesc}>{job.desc}</Text>
+                <Text style={s.expRole}>{job.role}</Text>
+              </View>
+              <View style={s.expRight}>
+                {job.location ? <Text style={s.expLocation}>{job.location}</Text> : null}
+                <Text style={s.expPeriod}>{job.period}</Text>
+              </View>
+            </View>
+            {getExperienceDetails(job).map((detail, detailIndex) => (
+              <View key={detailIndex} style={s.expBullet}>
+                <Text style={s.expBulletDot}>•</Text>
+                <Text style={s.expDesc}>{detail}</Text>
               </View>
             ))}
           </View>
+        ))}
+      </View>
 
-          {/* Projects */}
-          <View style={s.section}>
-            <Text style={s.sectionTitle}>Featured Projects</Text>
-            <View style={s.divider} />
-            {featuredProjects.map((proj, i) => (
-              <View key={i} style={s.projItem}>
-                <View style={s.projTopRow}>
-                  <Text style={s.projName}>{proj.name}</Text>
-                  <Link src={proj.live} style={s.projLink}>{proj.live.replace("https://", "")}</Link>
-                </View>
-                <Text style={s.projDesc}>{proj.description}</Text>
-                <View style={s.tagRow}>
-                  {proj.tech.map((t, j) => (
-                    <Text key={j} style={s.tag}>{t}</Text>
-                  ))}
-                </View>
-              </View>
-            ))}
+      {/* ── Projects ── */}
+      <Text style={s.sectionTitle}>Projects</Text>
+      <View style={s.divider} />
+      <View style={s.section}>
+        {featuredProjects.map((proj, i) => (
+          <View key={i} style={s.projItem}>
+            <View style={s.projTopRow}>
+              <Text style={s.projName}>{proj.name}</Text>
+              <Link src={proj.live} style={s.projLink}>{proj.live.replace("https://", "")}</Link>
+            </View>
+            <Text style={s.projDesc}>{proj.description}</Text>
+            <View style={s.tagRow}>
+              {proj.tech.map((t, j) => (
+                <Text key={j} style={s.tag}>{t}{j < proj.tech.length - 1 ? " ·" : ""}</Text>
+              ))}
+            </View>
           </View>
+        ))}
+      </View>
 
-        </View>
-
-        {/* Sidebar */}
-        <View style={s.sidebar}>
-
-          {/* About */}
-          <View style={s.section}>
-            <Text style={s.sectionTitle}>About</Text>
-            <View style={s.divider} />
-            {personal.about.map((para, i) => (
-              <Text key={i} style={s.aboutText}>{para}</Text>
-            ))}
+      {/* ── Skills ── */}
+      <Text style={s.sectionTitle}>Skills</Text>
+      <View style={s.divider} />
+      <View style={s.section}>
+        {Object.entries(skills).map(([category, list], i) => (
+          <View key={i} style={s.skillRow}>
+            <Text style={s.skillCategory}>{category}</Text>
+            <Text style={s.skillList}>{list.join(", ")}</Text>
           </View>
-
-          {/* Skills */}
-          <View style={s.section}>
-            <Text style={s.sectionTitle}>Skills</Text>
-            <View style={s.divider} />
-            {Object.entries(skills).map(([category, list], i) => (
-              <View key={i} style={s.skillGroup}>
-                <Text style={s.skillLabel}>{category}</Text>
-                <Text style={s.skillList}>{list.join(", ")}</Text>
-              </View>
-            ))}
-          </View>
-
-        </View>
+        ))}
       </View>
 
     </Page>
@@ -338,7 +388,7 @@ export default function CVDownloadButton() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "Adeoluwa_Adegoke_CV.pdf";
+      a.download = "001_Adeoluwa_Adegoke_CV.pdf";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

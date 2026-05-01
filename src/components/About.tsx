@@ -1,4 +1,4 @@
-import { personal } from "../data/portfolio";
+import { personal, education } from "../data/portfolio";
 
 export default function About() {
   return (
@@ -33,9 +33,13 @@ export default function About() {
         </div>
         <div>
           <div className="mb-8">
-            <div className="text-[10px] text-[#999] uppercase tracking-[0.1em] mb-1.5">Education</div>
-            <div className="text-[13px] sm:text-[14px] text-[#ccc]">B.Eng. Agricultural Engineering</div>
-            <div className="text-[12px] text-[#999] mt-0.5">FUNAAB · 2024</div>
+            <div className="text-[10px] text-[#999] uppercase tracking-[0.1em] mb-3">Education</div>
+            {education.map((edu, i) => (
+              <div key={i} className={i < education.length - 1 ? "mb-4" : ""}>
+                <div className="text-[13px] sm:text-[14px] text-[#ccc]">{edu.degree}</div>
+                <div className="text-[12px] text-[#999] mt-0.5">{edu.institution} · {edu.period.split("–")[1]?.trim() ?? edu.period}</div>
+              </div>
+            ))}
           </div>
           <div>
             <div className="text-[10px] text-[#999] uppercase tracking-[0.1em] mb-3">Connect</div>

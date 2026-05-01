@@ -1,5 +1,5 @@
 export const personal = {
-  name: "Adeoluwa Adegoke",
+  name: "Adeoluwa Al-Ameen Adegoke",
   title: "Full-Stack Developer",
   location: "Ibadan, Nigeria",
   email: "adeoluwaadegoke05@gmail.com",
@@ -25,6 +25,21 @@ export const skills = {
   Learning: ["GraphQL", "React Native"],
 };
 
+export const education = [
+  {
+    institution: "SQI College of ICT",
+    location: "Ibadan, Nigeria",
+    degree: "Professional Certificate in Software Engineering",
+    period: "November 2024 – November 2025",
+  },
+  {
+    institution: "Federal University of Agriculture, Abeokuta",
+    location: "Abeokuta, Nigeria",
+    degree: "B.Eng in Agricultural and Bioresources Engineering",
+    period: "June 2019 – August 2024",
+  },
+];
+
 export const projects = [
   {
     id: "01",
@@ -44,15 +59,15 @@ export const projects = [
     live: "https://arenagameplay.vercel.app/",
     featured: true,
   },
- {
-  id: "03",
-  name: "Ember",
-  description:
-    "Real-time chat PWA with DMs, group chats, typing indicators, online presence, Google OAuth, and offline support. Installable on iOS and Android.",
-  tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-  live: "https://emberconnect.vercel.app/",
-  featured: true,
-},
+  {
+    id: "03",
+    name: "Ember",
+    description:
+      "Real-time chat PWA with DMs, group chats, typing indicators, online presence, Google OAuth, and offline support. Installable on iOS and Android.",
+    tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
+    live: "https://emberconnect.vercel.app/",
+    featured: true,
+  },
   {
     id: "04",
     name: "Spendly",
@@ -95,20 +110,37 @@ export const experience = [
   {
     role: "Frontend Developer",
     org: "SWOT Builds",
+    location: "Remote",
     period: "2025 — Present",
-    desc: "Building and maintaining a multi-user platform that connects employers, professionals, startup founders, and investors. Working across the full frontend stack with React, TypeScript, and Tailwind.",
+    desc: "Building and maintaining a multi-user platform that connects employers, professionals, startup founders, and investors. Working across the full frontend stack with Next.js, TypeScript, and Tailwind.",
+    details: [
+      "Building and maintaining a multi-user platform that connects employers, professionals, startup founders, and investors.",
+      "Developing responsive interfaces with Next.js, TypeScript, and Tailwind to improve usability across desktop and mobile.",
+      "Collaborating with backend and product teams to ship features faster and keep UI behavior consistent across modules.",
+    ],
   },
   {
     role: "React Instructor",
     org: "SQI College of ICT",
+    location: "Abeokuta, Nigeria",
     period: "2025 — Present",
     desc: "Teaching React to students as part of my NYSC posting. Covering component architecture, hooks, state management, and building real-world projects.",
+    details: [
+      "Teaching React to students as part of my NYSC posting, with emphasis on practical project-based learning.",
+      "Covering component architecture, hooks, state management, routing, and API integration with real-world examples.",
+      "Mentoring students through assignments and capstone projects, helping them build deployable frontend applications.",
+    ],
   },
- 
   {
     role: "Tech Instructor",
     org: "Part-Time",
+    location: "Ibadan, Nigeria",
     period: "2024 — Present",
     desc: "Teaching Scratch programming and basic HTML/CSS to young learners, introducing them to coding fundamentals through fun, creative projects.",
+    details: [
+      "Teaching Scratch programming and basic HTML/CSS to young learners using age-appropriate, hands-on lessons.",
+      "Designing interactive class activities that improve confidence in problem-solving and logical thinking.",
+      "Tracking learner progress and adapting lesson delivery to support different learning paces.",
+    ],
   },
 ];
