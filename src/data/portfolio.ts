@@ -43,6 +43,15 @@ export const education = [
 export const projects = [
   {
     id: "01",
+    name: "Klassroom",
+    description:
+      "Full-stack classroom management platform with multi-role authentication, assignment tracking with late submission detection, a real-time live submission board, timed coding challenges with a leaderboard, email notifications via Resend, and student self-enroll via invite links.",
+    tech: ["Next.js", "TypeScript", "MongoDB", "Resend"],
+    live: "https://klassroomapp.vercel.app/",
+    featured: true,
+  },
+  {
+    id: "02",
     name: "FindAm",
     description:
       "Early-stage startup MVP for connecting people with reliable local professionals. Features a full provider registration flow, customer search, dynamic routing for profiles, and secure authentication.",
@@ -51,7 +60,7 @@ export const projects = [
     featured: true,
   },
   {
-    id: "02",
+    id: "03",
     name: "Arena",
     description:
       "Multiplayer gaming hub where players connect, create private rooms, and compete in real-time. Games include Reaction, TicTacToe, Hangman, Wordle Duel, and Connect Four. Built with a full Socket.io backend for live gameplay and match results.",
@@ -60,7 +69,7 @@ export const projects = [
     featured: true,
   },
   {
-    id: "03",
+    id: "04",
     name: "Ember",
     description:
       "Real-time chat PWA with DMs, group chats, typing indicators, online presence, Google OAuth, and offline support. Installable on iOS and Android.",
@@ -69,7 +78,7 @@ export const projects = [
     featured: true,
   },
   {
-    id: "04",
+    id: "05",
     name: "Spendly",
     description:
       "Financial expense tracker with category breakdowns, data visualization, and persistent storage.",
@@ -78,7 +87,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: "05",
+    id: "06",
     name: "Moviemood",
     description:
       "Cinema booking platform with admin dashboard, seat selection, payment integration, and email notifications.",
@@ -87,7 +96,7 @@ export const projects = [
     featured: true,
   },
   {
-    id: "06",
+    id: "07",
     name: "myCinema",
     description:
       "Cinema web application where users can browse movies, view details, and book tickets with persistent storage using Firebase.",
@@ -96,7 +105,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: "07",
+    id: "08",
     name: "EdenVille",
     description:
       "E-commerce web application offering a seamless shopping experience with user authentication, product browsing, and a functional shopping cart.",

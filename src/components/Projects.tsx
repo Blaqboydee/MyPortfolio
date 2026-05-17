@@ -5,17 +5,19 @@ import spendly from "../assets/spendly.jpg";
 import movieMood from "../assets/moviemood.jpg";
 import myCinema from "../assets/myCinema.jpg";
 import edenville from "../assets/edenville.jpg";
+import klassroom from "../assets/klassroom.jpg";
 import findAm from "../assets/image.png";
 import arena from "../assets/Arena.png";
 
 const images: Record<string, string> = {
-  "01": findAm,
-  "02": arena,
-  "03": ember,
-  "04": spendly,
-  "05": movieMood,
-  "06": myCinema,
-  "07": edenville,
+  "01": klassroom,
+  "02": findAm,
+  "03": arena,
+  "04": ember,
+  "05": spendly,
+  "06": movieMood,
+  "07": myCinema,
+  "08": edenville,
 };
 
 export default function Projects() {
