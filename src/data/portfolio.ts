@@ -45,7 +45,7 @@ export const projects = [
     id: "01",
     name: "Klassroom",
     description:
-      "",
+      "Full-stack classroom management platform where instructors can manage assignments, grade submissions, run timed coding challenges, and monitor student activity through a real-time dashboard. Includes multi-role authentication, late submission detection, email notifications via Resend, and self-enrollment via invite links.",
     tech: ["Next.js", "TypeScript", "MongoDB", "Resend"],
     live: "https://klassroomapp.vercel.app/",
     featured: true,
