@@ -1,40 +1,40 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { personal } from "../data/portfolio";
-import { useRegion } from "../context/RegionContext";
+// import { useRegion } from "../context/RegionContext";
 
 const links = ["Work", "Stack", "About", "Experience", "Contact"];
 
-function RegionToggle() {
-  const { region, setRegion } = useRegion();
-  const options: { value: "ng" | "uk"; label: string }[] = [
-    { value: "ng", label: "NG" },
-    { value: "uk", label: "UK" },
-  ];
-
-  return (
-    <div
-      className="flex items-center gap-0.5 p-0.5 rounded-full border border-[#222] bg-[#0e0e0e]"
-      role="group"
-      aria-label="Region"
-    >
-      {options.map((o) => (
-        <button
-          key={o.value}
-          onClick={() => setRegion(o.value)}
-          aria-pressed={region === o.value}
-          className={`text-[10px] tracking-[0.1em] px-2.5 py-1 rounded-full transition-colors duration-200 ${
-            region === o.value
-              ? "bg-white text-[#0a0a0a] font-medium"
-              : "text-[#888] hover:text-white"
-          }`}
-        >
-          {o.label}
-        </button>
-      ))}
-    </div>
-  );
-}
+// function RegionToggle() {
+//   const { region, setRegion } = useRegion();
+//   const options: { value: "ng" | "uk"; label: string }[] = [
+//     { value: "ng", label: "NG" },
+//     { value: "uk", label: "UK" },
+//   ];
+//
+//   return (
+//     <div
+//       className="flex items-center gap-0.5 p-0.5 rounded-full border border-[#222] bg-[#0e0e0e]"
+//       role="group"
+//       aria-label="Region"
+//     >
+//       {options.map((o) => (
+//         <button
+//           key={o.value}
+//           onClick={() => setRegion(o.value)}
+//           aria-pressed={region === o.value}
+//           className={`text-[10px] tracking-[0.1em] px-2.5 py-1 rounded-full transition-colors duration-200 ${
+//             region === o.value
+//               ? "bg-white text-[#0a0a0a] font-medium"
+//               : "text-[#888] hover:text-white"
+//           }`}
+//         >
+//           {o.label}
+//         </button>
+//       ))}
+//     </div>
+//   );
+// }
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -98,12 +98,12 @@ export default function Navbar() {
           >
             Blog
           </Link>
-          <RegionToggle />
+          {/* <RegionToggle /> */}
         </div>
 
-        {/* Mobile: region toggle + hamburger */}
+        {/* Mobile: hamburger */}
         <div className="md:hidden flex items-center gap-2">
-          <RegionToggle />
+          {/* <RegionToggle /> */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex flex-col gap-[5px] bg-transparent border-0 cursor-pointer p-2"

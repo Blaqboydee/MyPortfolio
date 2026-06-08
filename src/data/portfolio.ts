@@ -43,9 +43,9 @@ export const personalByRegion = {
 
 export const skills = {
   Frontend: ["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "HTML5", "CSS3", "Framer Motion"],
-  Backend: ["Node.js", "Express", "MongoDB", "Socket.io", "Firebase"],
+  Backend: ["Node.js", "Express", "MongoDB", "Socket.io", "Firebase", "Supabase"],
   Tools: ["Git", "Vite", "Vercel"],
-  Learning: ["GraphQL", "React Native"],
+  Learning: ["PostgreSQL / SQL", "GraphQL", "React Native"],
 };
 
 export const education = [
