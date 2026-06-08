@@ -17,7 +17,6 @@ import {
   experienceByRegion,
   type Region,
 } from "../data/portfolio";
-import { useRegion } from "../context/RegionContext";
 
 type PersonalData = (typeof personalByRegion)[Region];
 type ExperienceData = (typeof experienceByRegion)[Region];
@@ -395,36 +394,62 @@ const CVDocument = ({
 
 // ─── Download Button ──────────────────────────────────────────────────────────
 
-export default function CVDownloadButton() {
-  const { region, personal, experience } = useRegion();
-  const [loading, setLoading] = useState(false);
+const btnClass =
+  "inline-block text-[#bbb] text-[12px] sm:text-[13px] px-6 py-3 border border-[#444] rounded tracking-[0.04em] hover:text-white hover:border-[#888] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
-  const handleDownload = async () => {
-    setLoading(true);
+export default function CVDownloadButton() {
+  const [loading, setLoading] = useState<Region | null>(null);
+
+  const download = async (r: Region) => {
+    setLoading(r);
     try {
       const blob = await pdf(
-        <CVDocument personal={personal} experience={experience} />
+        <CVDocument
+          personal={personalByRegion[r]}
+          experience={experienceByRegion[r]}
+        />
       ).toBlob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `001_Adeoluwa_Adegoke_CV_${region.toUpperCase()}.pdf`;
+      a.download = import.meta.env.DEV
+        ? `001_Adeoluwa_Adegoke_CV_${r.toUpperCase()}.pdf`
+        : `001_Adeoluwa_Adegoke_CV.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } finally {
-      setLoading(false);
+      setLoading(null);
     }
   };
 
+  // Dev: show both region buttons so you can test both CVs
+  if (import.meta.env.DEV) {
+    return (
+      <div className="flex gap-2">
+        {(["ng", "uk"] as Region[]).map((r) => (
+          <button
+            key={r}
+            onClick={() => download(r)}
+            disabled={loading !== null}
+            className={btnClass}
+          >
+            {loading === r ? "Generating…" : `CV (${r.toUpperCase()})`}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  // Prod: Nigerian CV only
   return (
     <button
-      onClick={handleDownload}
-      disabled={loading}
-      className="inline-block text-[#bbb] text-[12px] sm:text-[13px] px-6 py-3 border border-[#444] rounded tracking-[0.04em] hover:text-white hover:border-[#888] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      onClick={() => download("ng")}
+      disabled={loading !== null}
+      className={btnClass}
     >
-      {loading ? "Generating…" : `Download CV (${region.toUpperCase()})`}
+      {loading ? "Generating…" : "Download CV"}
     </button>
   );
 }
