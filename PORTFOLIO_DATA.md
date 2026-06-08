@@ -5,18 +5,23 @@
 
 ---
 
+> The site supports **two regional variants** (toggle in the navbar, persisted in
+> localStorage): **NG** (Nigeria) and **UK**. Shared identity is the same across both;
+> only location, phone, the about blurb, and work experience differ. The CV download
+> reflects the active region (`..._CV_NG.pdf` / `..._CV_UK.pdf`).
+
 ## Personal Info
 
-| Field       | Value                                 |
-|-------------|---------------------------------------|
-| Name        | Adeoluwa Adegoke                      |
-| Title       | Full-Stack Developer                  |
-| Location    | Ibadan, Nigeria                       |
-| Education   | B.Eng. Agricultural Engineering, FUNAAB (2024) |
-| Email       | adeoluwaadegoke05@gmail.com           |
-| GitHub      | https://github.com/Blaqboydee         |
-| LinkedIn    | https://linkedin.com/in/adegokeadeoluwa |
-| WhatsApp    | +234 913 376 3902                     |
+| Field       | Shared / NG                           | UK variant                            |
+|-------------|---------------------------------------|---------------------------------------|
+| Name        | Adeoluwa Al-Ameen Adegoke             | (same)                                |
+| Title       | Full-Stack Developer                  | (same)                                |
+| Location    | Ibadan, Nigeria                       | North Yorkshire, United Kingdom       |
+| Phone       | +234 913 376 3902                     | +44 7763 992972                       |
+| Education   | B.Eng. Agricultural Engineering, FUNAAB (2024) | (same)                       |
+| Email       | adeoluwaadegoke05@gmail.com           | (same)                                |
+| GitHub      | https://github.com/Blaqboydee         | (same)                                |
+| LinkedIn    | https://linkedin.com/in/adegoke-adeoluwa-579119345 | (same)                   |
 
 ---
 
@@ -110,24 +115,29 @@ I started coding in 2022 with HTML and CSS, took a break to focus on university,
 
 ## Experience
 
-### Full Stack Developer (Student)
-**Tech School Program** · 2024 — Present
+### NG variant
 
-Building full-stack web applications using React, Node.js, and MongoDB. Collaborating on team projects, integrating real APIs, and learning advanced concepts like authentication and deployment.
+**Frontend Developer** · SWOT Builds · Remote · 2025 — Present
+Building and maintaining a multi-user platform that connects employers, professionals, startup founders, and investors with Next.js, TypeScript, and Tailwind.
+
+**React Instructor** · SQI College of ICT · Abeokuta, Nigeria · 2025 — Present
+Teaching React (component architecture, hooks, state management, routing, API integration) as part of NYSC posting; mentoring students through capstone projects.
+
+**Tech Instructor** · Part-Time · Ibadan, Nigeria · 2024 — Present
+Teaching Scratch and basic HTML/CSS to young learners through creative, hands-on projects.
 
 ---
 
-### Freelance Web Developer
-**Self-Employed** · 2022 — 2023
+### UK variant *(3+ years, continuous)*
 
-Designed and developed responsive websites for small businesses. Implemented modern UI and handled client requests with clean, maintainable front-end code.
+**Full-Stack Developer** · SWOT Builds · Remote · 2024 — Present
+Building and maintaining a multi-user platform connecting employers, professionals, startup founders, and investors across the full stack with Next.js, TypeScript, and Tailwind.
 
----
+**React Instructor** · SQI College of ICT · Remote · 2024 — 2025
+Taught React (component architecture, hooks, state management, routing, API integration); mentored students through capstone projects to deployment.
 
-### Tech Instructor
-**Part-Time** · 2024 — Present
-
-Teaching Scratch programming and basic HTML/CSS to young learners, introducing them to coding fundamentals through fun, creative projects.
+**Freelance Web Developer** · Self-Employed · Remote · 2022 — 2024
+Designed and developed responsive websites and web apps for small businesses and individual clients; built React/JavaScript frontends end-to-end, from requirements through deployment.
 
 ---
 

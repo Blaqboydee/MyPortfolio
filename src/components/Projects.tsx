@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, type Variants } from "framer-motion";
 import { projects } from "../data/portfolio";
 import ember from "../assets/ember.png";
 import spendly from "../assets/spendly.jpg";
@@ -20,6 +21,16 @@ const images: Record<string, string> = {
   "08": edenville,
 };
 
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 export default function Projects() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [filter, setFilter] = useState<"all" | "featured">("featured");
@@ -29,7 +40,13 @@ export default function Projects() {
   return (
     <section id="work" className="bg-[#0a0a0a] py-16 sm:py-20">
       {/* header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline px-5 sm:px-8 md:px-10 mb-6 sm:mb-8 gap-3 sm:gap-0">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-60px" }}
+        className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline px-5 sm:px-8 md:px-10 mb-6 sm:mb-8 gap-3 sm:gap-0"
+      >
         <span className="text-[11px] uppercase tracking-[0.12em] text-[#999]">
           Selected work
         </span>
@@ -48,13 +65,20 @@ export default function Projects() {
             </button>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* project list */}
-      <div className="flex flex-col gap-px bg-[#161616]">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-60px" }}
+        className="flex flex-col gap-px bg-[#161616]"
+      >
         {shown.map((p) => (
-          <div
+          <motion.div
             key={p.id}
+            variants={item}
             onMouseEnter={() => setHovered(p.id)}
             onMouseLeave={() => setHovered(null)}
             className={`px-5 sm:px-8 md:px-10 py-6 sm:py-7 grid grid-cols-1 md:grid-cols-[1fr_auto] items-start gap-4 sm:gap-6 md:gap-8 cursor-pointer transition-colors duration-150 group ${
@@ -76,10 +100,7 @@ export default function Projects() {
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {p.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="text-[10px] font-mono text-[#999] border border-[#444] px-2 py-0.5 rounded-[3px]"
-                  >
+                  <span key={t} className="text-[10px] font-mono text-[#999] border border-[#444] px-2 py-0.5 rounded-[3px]">
                     {t}
                   </span>
                 ))}
@@ -109,9 +130,9 @@ export default function Projects() {
                 Live ↗
               </a>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -9,7 +9,18 @@ import {
   Font,
   pdf,
 } from "@react-pdf/renderer";
-import { personal, skills, projects, experience, education } from "../data/portfolio";
+import {
+  skills,
+  projects,
+  education,
+  personalByRegion,
+  experienceByRegion,
+  type Region,
+} from "../data/portfolio";
+import { useRegion } from "../context/RegionContext";
+
+type PersonalData = (typeof personalByRegion)[Region];
+type ExperienceData = (typeof experienceByRegion)[Region];
 
 // ─── Register Computer Modern ─────────────────────────────────────────────────
 
@@ -265,7 +276,7 @@ const s = StyleSheet.create({
 
 const featuredProjects = projects.filter((p) => p.featured);
 
-const getExperienceDetails = (job: { details?: string[]; desc: string }) => {
+const getExperienceDetails = (job: { details?: readonly string[]; desc: string }): readonly string[] => {
   if (Array.isArray(job.details) && job.details.length > 0) {
     return job.details;
   }
@@ -275,7 +286,13 @@ const getExperienceDetails = (job: { details?: string[]; desc: string }) => {
 
 // ─── Document ─────────────────────────────────────────────────────────────────
 
-const CVDocument = () => (
+const CVDocument = ({
+  personal,
+  experience,
+}: {
+  personal: PersonalData;
+  experience: ExperienceData;
+}) => (
   <Document title={`${personal.name} — CV`} author={personal.name}>
     <Page size="A4" style={s.page}>
 
@@ -286,7 +303,7 @@ const CVDocument = () => (
         <View style={s.contactRow}>
           <Link src={`mailto:${personal.email}`} style={s.contactLink}>{personal.email}</Link>
           <Text style={s.contactSep}>·</Text>
-          <Text style={s.contactLink}>{personal.whatsapp}</Text>
+          <Text style={s.contactLink}>{personal.phone}</Text>
           <Text style={s.contactSep}>·</Text>
           <Link src={personal.github} style={s.contactLink}>github.com/Blaqboydee</Link>
           <Text style={s.contactSep}>·</Text>
@@ -379,16 +396,19 @@ const CVDocument = () => (
 // ─── Download Button ──────────────────────────────────────────────────────────
 
 export default function CVDownloadButton() {
+  const { region, personal, experience } = useRegion();
   const [loading, setLoading] = useState(false);
 
   const handleDownload = async () => {
     setLoading(true);
     try {
-      const blob = await pdf(<CVDocument />).toBlob();
+      const blob = await pdf(
+        <CVDocument personal={personal} experience={experience} />
+      ).toBlob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "001_Adeoluwa_Adegoke_CV.pdf";
+      a.download = `001_Adeoluwa_Adegoke_CV_${region.toUpperCase()}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -404,7 +424,7 @@ export default function CVDownloadButton() {
       disabled={loading}
       className="inline-block text-[#bbb] text-[12px] sm:text-[13px] px-6 py-3 border border-[#444] rounded tracking-[0.04em] hover:text-white hover:border-[#888] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {loading ? "Generating…" : "Download CV"}
+      {loading ? "Generating…" : `Download CV (${region.toUpperCase()})`}
     </button>
   );
 }

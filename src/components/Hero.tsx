@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { personal } from "../data/portfolio";
 import CVDownloadButton from "./CV";
 
@@ -33,13 +34,17 @@ export default function Hero() {
       />
 
       {/* top bar */}
-      <div className="absolute top-20 sm:top-24 left-5 right-5 sm:left-8 sm:right-8 md:left-10 md:right-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="absolute top-20 sm:top-24 left-5 right-5 sm:left-8 sm:right-8 md:left-10 md:right-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0"
+      >
         <span className="text-[11px] text-[#888] tracking-[0.14em] uppercase font-mono">
-          Portfolio · 2026
+          Portfolio · {new Date().getFullYear()}
         </span>
         <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#3B6D11] animate-pulse" />
             <span className="text-[11px] text-[#3B6D11] tracking-[0.08em]">Available</span>
           </div>
           <div className="flex gap-4 sm:gap-5">
@@ -58,35 +63,42 @@ export default function Hero() {
                 className="text-[#aaa] hover:text-white transition-colors duration-200"
                 aria-label={s.label}
               >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="sm:w-[18px] sm:h-[18px]"
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="sm:w-[18px] sm:h-[18px]">
                   <path d={s.icon} />
                 </svg>
               </a>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* main content */}
       <div className="relative max-w-[900px]">
-        <h1
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
           className="font-black text-white leading-[0.95] tracking-[-0.03em] m-0 mb-6 sm:mb-8"
           style={{ fontSize: "clamp(3rem, 10vw, 8rem)" }}
         >
-          ADEOLUWA<br />ADEGOKE<span ref={dotRef} className="text-[#3B6D11] transition-opacity duration-100">.</span>
-        </h1>
+          ADEOLUWA<br />ADEGOKE
+        </motion.h1>
 
-        <div className="text-[12px] sm:text-[13px] text-[#999] tracking-[0.12em] uppercase mb-3">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="text-[12px] sm:text-[13px] text-[#999] tracking-[0.12em] uppercase mb-3"
+        >
           {personal.title} — {personal.tagline}
-        </div>
-        <div className="text-[11px] sm:text-[12px] text-[#aaa] font-mono mb-8 sm:mb-10">
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="text-[11px] sm:text-[12px] text-[#aaa] font-mono mb-8 sm:mb-10"
+        >
           ↳ I am currently working on{" "}
           <a
             href={personal.arenaLink}
@@ -96,9 +108,14 @@ export default function Hero() {
           >
             Arena
           </a>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center"
+        >
           <a
             href="#work"
             onClick={(e) => {
@@ -118,7 +135,7 @@ export default function Hero() {
             GitHub →
           </a>
           <CVDownloadButton />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

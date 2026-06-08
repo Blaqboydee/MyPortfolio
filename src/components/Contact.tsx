@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { personal } from "../data/portfolio";
+import { motion } from "framer-motion";
+import { useRegion } from "../context/RegionContext";
 
 export default function Contact() {
+  const { personal } = useRegion();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -15,9 +17,7 @@ export default function Contact() {
       const response = await fetch("https://formspree.io/f/xdapjpan", {
         method: "POST",
         body: formData,
-        headers: {
-          Accept: "application/json",
-        },
+        headers: { Accept: "application/json" },
       });
 
       if (response.ok) {
@@ -28,7 +28,7 @@ export default function Contact() {
         setStatus("error");
         setTimeout(() => setStatus("idle"), 5000);
       }
-    } catch (error) {
+    } catch {
       setStatus("error");
       setTimeout(() => setStatus("idle"), 5000);
     }
@@ -40,12 +40,22 @@ export default function Contact() {
       className="bg-[#0a0a0a] border-t border-[#161616] px-5 sm:px-8 md:px-10 py-20 sm:py-24"
     >
       <div className="max-w-[900px] mx-auto">
-        <div className="text-[11px] uppercase tracking-[0.12em] text-[#999] mb-6">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-60px" }}
+          className="text-[11px] uppercase tracking-[0.12em] text-[#999] mb-6"
+        >
           Contact
-        </div>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-          {/* Left Column - Text Content */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-60px" }}
+          >
             <h2
               className="font-medium text-white leading-[1.1] tracking-[-0.02em] mb-5"
               style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)" }}
@@ -58,84 +68,65 @@ export default function Contact() {
               Open to full-time roles, freelance projects, and collaborations. If you have something in mind, reach out.
             </p>
             <div className="flex flex-col gap-3">
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-[#bbb] text-[13px] hover:text-white transition-colors duration-200"
-              >
-                <span className="text-[#999]">LinkedIn</span>
-                <span className="text-[#666]">→</span>
-              </a>
-              <a
-                href={personal.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-[#bbb] text-[13px] hover:text-white transition-colors duration-200"
-              >
-                <span className="text-[#999]">GitHub</span>
-                <span className="text-[#666]">→</span>
-              </a>
-              <a
-                href={`https://wa.me/${personal.whatsapp.replace(/\D/g, "")}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-[#bbb] text-[13px] hover:text-white transition-colors duration-200"
-              >
-                <span className="text-[#999]">WhatsApp</span>
-                <span className="text-[#666]">→</span>
-              </a>
+              {[
+                { label: "LinkedIn", href: personal.linkedin },
+                { label: "GitHub", href: personal.github },
+                { label: "WhatsApp", href: `https://wa.me/${personal.whatsapp.replace(/\D/g, "")}` },
+              ].map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-[#bbb] text-[13px] hover:text-white transition-colors duration-200"
+                >
+                  <span className="text-[#999]">{l.label}</span>
+                  <span className="text-[#666]">→</span>
+                </a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column - Form */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut", delay: 0.1 }}
+            viewport={{ once: true, margin: "-60px" }}
+          >
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div>
                 <label htmlFor="name" className="block text-[11px] text-[#999] uppercase tracking-[0.08em] mb-2">
                   Name
                 </label>
                 <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
+                  type="text" id="name" name="name" required
                   className="w-full bg-[#0e0e0e] border border-[#1f1f1f] rounded px-4 py-3 text-[14px] text-white placeholder-[#666] focus:border-[#444] focus:outline-none transition-colors duration-200"
                   placeholder="Your name"
                   disabled={status === "submitting"}
                 />
               </div>
-
               <div>
                 <label htmlFor="email" className="block text-[11px] text-[#999] uppercase tracking-[0.08em] mb-2">
                   Email
                 </label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
+                  type="email" id="email" name="email" required
                   className="w-full bg-[#0e0e0e] border border-[#1f1f1f] rounded px-4 py-3 text-[14px] text-white placeholder-[#666] focus:border-[#444] focus:outline-none transition-colors duration-200"
                   placeholder="you@example.com"
                   disabled={status === "submitting"}
                 />
               </div>
-
               <div>
                 <label htmlFor="message" className="block text-[11px] text-[#999] uppercase tracking-[0.08em] mb-2">
                   Message
                 </label>
                 <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={5}
+                  id="message" name="message" required rows={5}
                   className="w-full bg-[#0e0e0e] border border-[#1f1f1f] rounded px-4 py-3 text-[14px] text-white placeholder-[#666] focus:border-[#444] focus:outline-none transition-colors duration-200 resize-none"
                   placeholder="Tell me about your project..."
                   disabled={status === "submitting"}
                 />
               </div>
-
               <button
                 type="submit"
                 disabled={status === "submitting"}
@@ -143,20 +134,18 @@ export default function Contact() {
               >
                 {status === "submitting" ? "Sending..." : "Send message"}
               </button>
-
               {status === "success" && (
                 <div className="text-[13px] text-[#3B6D11] border border-[#1f3a12] bg-[#0e1f0a] px-4 py-3 rounded">
                   Message sent successfully! I'll get back to you soon.
                 </div>
               )}
-
               {status === "error" && (
                 <div className="text-[13px] text-[#d11] border border-[#3a1212] bg-[#1f0a0a] px-4 py-3 rounded">
                   Something went wrong. Please try again or email me directly.
                 </div>
               )}
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

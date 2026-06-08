@@ -1,11 +1,27 @@
-import { personal, education } from "../data/portfolio";
+import { motion } from "framer-motion";
+import { education } from "../data/portfolio";
+import { useRegion } from "../context/RegionContext";
 
 export default function About() {
+  const { personal } = useRegion();
   return (
     <section id="about" className="bg-[#0a0a0a] border-t border-[#161616] px-5 sm:px-8 md:px-10 py-16 sm:py-20">
-      <div className="text-[11px] uppercase tracking-[0.12em] text-[#999] mb-8 sm:mb-10">About</div>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-60px" }}
+        className="text-[11px] uppercase tracking-[0.12em] text-[#999] mb-8 sm:mb-10"
+      >
+        About
+      </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 max-w-[900px]">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-60px" }}
+        >
           {personal.about.map((p, i) => (
             <p
               key={i}
@@ -30,8 +46,13 @@ export default function About() {
               </a>
             </div>
           </div>
-        </div>
-        <div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, margin: "-60px" }}
+        >
           <div className="mb-8">
             <div className="text-[10px] text-[#999] uppercase tracking-[0.1em] mb-3">Education</div>
             {education.map((edu, i) => (
@@ -61,7 +82,7 @@ export default function About() {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

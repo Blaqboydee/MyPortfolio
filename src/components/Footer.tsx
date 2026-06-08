@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0a0a0a] border-t border-[#161616] px-5 sm:px-8 md:px-10 py-6 flex justify-between items-center flex-wrap gap-4">
       <span className="text-[11px] text-[#777]">
-        © 2026 {personal.name}
+        {new Date().getFullYear()} {personal.name}
       </span>
       <div className="flex gap-6">
         {[
