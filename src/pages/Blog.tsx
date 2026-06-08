@@ -78,7 +78,7 @@ export default function Blog() {
             />
             <div>
               <p className="text-[14px] font-medium text-[#d4d4d4]">Adeoluwa Adegoke</p>
-              <p className="text-[12px] text-[#777]">Full-stack developer. Writing about what I build and live.</p>
+              <p className="text-[12px] text-[#777]">Full-stack developer. Writing about what I'm building, and life.</p>
             </div>
           </div>
 
