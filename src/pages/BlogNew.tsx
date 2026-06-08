@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { useAuth } from "../context/AuthContext";
+import { supabase } from "../lib/supabase";
 import Navbar from "../components/Navbar";
 
 function slugify(title: string) {
@@ -12,6 +13,16 @@ function slugify(title: string) {
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 }
+
+function isValidSlug(s: string) {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s);
+}
+
+type FieldErrors = {
+  title?: string;
+  slug?: string;
+  body?: string;
+};
 
 export default function BlogNew() {
   const { signOut } = useAuth();
@@ -25,8 +36,10 @@ export default function BlogNew() {
   const [tags, setTags] = useState<string[]>([]);
   const [draft, setDraft] = useState(true);
   const [tab, setTab] = useState<"write" | "preview">("write");
+  const [submitting, setSubmitting] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
-  // auto-generate slug from title unless user has manually edited it
   useEffect(() => {
     if (!slugEdited) setSlug(slugify(title));
   }, [title, slugEdited]);
@@ -49,14 +62,62 @@ export default function BlogNew() {
 
   const removeTag = (tag: string) => setTags((prev) => prev.filter((t) => t !== tag));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validate = (): FieldErrors => {
+    const errs: FieldErrors = {};
+    if (!title.trim() || title.trim().length < 3)
+      errs.title = "Title must be at least 3 characters.";
+    if (!slug || !isValidSlug(slug))
+      errs.slug = "Slug must use only lowercase letters, numbers, and hyphens (e.g. my-post).";
+    if (!body.trim() || body.trim().length < 10)
+      errs.body = "Body must be at least 10 characters.";
+    return errs;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // wiring to Supabase comes next
-    console.log({ title, slug, excerpt, body, tags, draft });
+    setServerError(null);
+
+    const errs = validate();
+    if (Object.keys(errs).length > 0) {
+      setFieldErrors(errs);
+      return;
+    }
+    setFieldErrors({});
+    setSubmitting(true);
+
+    // SQL equivalent: INSERT INTO posts (title, slug, excerpt, body, tags, draft, published_at) VALUES (...)
+    const { data, error } = await supabase
+      .from("posts")
+      .insert({
+        title: title.trim(),
+        slug,
+        excerpt: excerpt.trim() || null,
+        body,
+        tags: tags.length > 0 ? tags : null,
+        draft,
+        published_at: draft ? null : new Date().toISOString(),
+      })
+      .select()
+      .single();
+
+    if (error) {
+      setServerError(
+        error.code === "23505"
+          ? "A post with this slug already exists. Choose a different slug."
+          : "Failed to save. Please try again."
+      );
+      setSubmitting(false);
+      return;
+    }
+
+    navigate(draft ? "/blog" : `/blog/${data.slug}`);
   };
 
   const inputClass =
-    "w-full bg-[#0d0d0d] border border-[#1f1f1f] rounded px-4 py-3 text-[14px] text-[#d4d4d4] placeholder-[#555] focus:outline-none focus:border-[#444] transition-colors duration-200";
+    "w-full bg-[#0d0d0d] border border-[#1f1f1f] rounded px-4 py-3 text-base text-[#d4d4d4] placeholder-[#555] focus:outline-none focus:border-[#444] transition-colors duration-200";
+
+  const inputErrorClass =
+    "w-full bg-[#0d0d0d] border border-red-800 rounded px-4 py-3 text-base text-[#d4d4d4] placeholder-[#555] focus:outline-none focus:border-red-700 transition-colors duration-200";
 
   const labelClass = "block text-[11px] text-[#888] tracking-[0.1em] uppercase mb-2";
 
@@ -64,7 +125,8 @@ export default function BlogNew() {
     <div className="bg-[#0a0a0a] min-h-screen">
       <Navbar />
       <main className="px-5 sm:px-8 md:px-10 pt-32 pb-24 max-w-[800px] mx-auto">
-        <div className="flex items-center justify-between mb-10">
+        {/* Header — stacks on mobile */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0 mb-10">
           <div>
             <p className="text-[11px] text-[#888] tracking-[0.14em] uppercase font-mono mb-1">
               New post
@@ -97,11 +159,13 @@ export default function BlogNew() {
             <input
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => { setTitle(e.target.value); setFieldErrors((p) => ({ ...p, title: undefined })); }}
               placeholder="What's this post about?"
-              className={inputClass}
-              required
+              className={fieldErrors.title ? inputErrorClass : inputClass}
             />
+            {fieldErrors.title && (
+              <p className="text-[12px] text-red-500 mt-1.5">{fieldErrors.title}</p>
+            )}
           </div>
 
           {/* Slug */}
@@ -117,17 +181,19 @@ export default function BlogNew() {
                 onChange={(e) => {
                   setSlugEdited(true);
                   setSlug(e.target.value);
+                  setFieldErrors((p) => ({ ...p, slug: undefined }));
                 }}
                 placeholder="post-slug"
-                className={`${inputClass} pl-[54px] font-mono`}
-                required
+                className={`${fieldErrors.slug ? inputErrorClass : inputClass} pl-[54px] font-mono`}
               />
             </div>
-            {!slugEdited && title && (
+            {fieldErrors.slug ? (
+              <p className="text-[12px] text-red-500 mt-1.5">{fieldErrors.slug}</p>
+            ) : !slugEdited && title ? (
               <p className="text-[11px] text-[#777] mt-1.5">
                 Auto-generated from title. Click to edit.
               </p>
-            )}
+            ) : null}
           </div>
 
           {/* Excerpt */}
@@ -167,11 +233,10 @@ export default function BlogNew() {
             {tab === "write" ? (
               <textarea
                 value={body}
-                onChange={(e) => setBody(e.target.value)}
+                onChange={(e) => { setBody(e.target.value); setFieldErrors((p) => ({ ...p, body: undefined })); }}
                 placeholder={`Write in markdown.\n\n## Section heading\n\nParagraph text here...`}
                 rows={18}
-                className={`${inputClass} resize-y font-mono text-[13px] leading-relaxed`}
-                required
+                className={`${fieldErrors.body ? inputErrorClass : inputClass} resize-y font-mono text-[13px] leading-relaxed`}
               />
             ) : (
               <div className="min-h-[320px] bg-[#0d0d0d] border border-[#1f1f1f] rounded px-4 py-3">
@@ -207,6 +272,9 @@ export default function BlogNew() {
                 )}
               </div>
             )}
+            {fieldErrors.body && (
+              <p className="text-[12px] text-red-500 mt-1.5">{fieldErrors.body}</p>
+            )}
           </div>
 
           {/* Tags */}
@@ -236,10 +304,16 @@ export default function BlogNew() {
                 onKeyDown={onTagKeyDown}
                 onBlur={() => tagInput.trim() && addTag(tagInput)}
                 placeholder={tags.length === 0 ? "Type a tag, press Enter or comma" : ""}
-                className="flex-1 min-w-[140px] bg-transparent text-[13px] text-[#d4d4d4] placeholder-[#555] focus:outline-none"
+                className="flex-1 min-w-[140px] bg-transparent text-base text-[#d4d4d4] placeholder-[#555] focus:outline-none"
               />
             </div>
           </div>
+
+          {serverError && (
+            <div className="text-[13px] text-red-500 border border-red-900 bg-[#1a0a0a] px-4 py-3 rounded">
+              {serverError}
+            </div>
+          )}
 
           {/* Draft toggle + Submit */}
           <div className="flex items-center justify-between pt-2">
@@ -263,9 +337,12 @@ export default function BlogNew() {
 
             <button
               type="submit"
-              className="bg-white text-[#0a0a0a] text-[12px] font-medium px-6 py-2.5 rounded tracking-[0.04em] hover:bg-neutral-100 transition-colors duration-200"
+              disabled={submitting}
+              className="bg-white text-[#0a0a0a] text-[12px] font-medium px-6 py-2.5 rounded tracking-[0.04em] hover:bg-neutral-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {draft ? "Save draft" : "Publish"}
+              {submitting
+                ? draft ? "Saving..." : "Publishing..."
+                : draft ? "Save draft" : "Publish"}
             </button>
           </div>
         </form>

@@ -100,7 +100,7 @@ export default function BlogEdit() {
   };
 
   const inputClass =
-    "w-full bg-[#0d0d0d] border border-[#1f1f1f] rounded px-4 py-3 text-[14px] text-[#d4d4d4] placeholder-[#555] focus:outline-none focus:border-[#444] transition-colors duration-200";
+    "w-full bg-[#0d0d0d] border border-[#1f1f1f] rounded px-4 py-3 text-base text-[#d4d4d4] placeholder-[#555] focus:outline-none focus:border-[#444] transition-colors duration-200";
 
   const labelClass = "block text-[11px] text-[#888] tracking-[0.1em] uppercase mb-2";
 
@@ -119,16 +119,16 @@ export default function BlogEdit() {
     <div className="bg-[#0a0a0a] min-h-screen">
       <Navbar />
       <main className="px-5 sm:px-8 md:px-10 pt-32 pb-24 max-w-[800px] mx-auto">
-        <div className="flex items-center justify-between mb-10">
-          <div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0 mb-10">
+          <div className="min-w-0">
             <p className="text-[11px] text-[#888] tracking-[0.14em] uppercase font-mono mb-1">
               Editing
             </p>
-            <h1 className="text-[28px] font-bold text-white tracking-[-0.02em] truncate max-w-[400px]">
+            <h1 className="text-[22px] sm:text-[28px] font-bold text-white tracking-[-0.02em] truncate">
               {post?.title}
             </h1>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 shrink-0">
             <Link
               to="/blog"
               className="text-[11px] text-[#777] tracking-[0.1em] uppercase no-underline hover:text-[#aaa] transition-colors"
@@ -278,7 +278,7 @@ export default function BlogEdit() {
                 onKeyDown={onTagKeyDown}
                 onBlur={() => tagInput.trim() && addTag(tagInput)}
                 placeholder={tags.length === 0 ? "Type a tag, press Enter or comma" : ""}
-                className="flex-1 min-w-[140px] bg-transparent text-[13px] text-[#d4d4d4] placeholder-[#555] focus:outline-none"
+                className="flex-1 min-w-[140px] bg-transparent text-base text-[#d4d4d4] placeholder-[#555] focus:outline-none"
               />
             </div>
           </div>

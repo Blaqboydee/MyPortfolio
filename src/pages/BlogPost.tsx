@@ -22,6 +22,14 @@ export default function BlogPost() {
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
 
   const handleDelete = async () => {
     if (!post) return;
@@ -174,13 +182,34 @@ export default function BlogPost() {
           </ReactMarkdown>
 
           {/* footer nav */}
-          <div className="mt-16 pt-8 border-t border-[#1a1a1a]">
+          <div className="mt-16 pt-8 border-t border-[#1a1a1a] flex items-center justify-between">
             <Link
               to="/blog"
-              className="text-[11px] text-[#aaa] tracking-[0.1em] uppercase no-underline hover:text-[#aaa] transition-colors duration-200"
+              className="text-[11px] text-[#aaa] tracking-[0.1em] uppercase no-underline hover:text-white transition-colors duration-200"
             >
               ← Back to all posts
             </Link>
+            <button
+              onClick={handleCopy}
+              className="flex items-center gap-1.5 text-[11px] text-[#777] tracking-[0.08em] uppercase hover:text-[#aaa] transition-colors duration-200 bg-transparent border-0 cursor-pointer p-0"
+            >
+              {copied ? (
+                <>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Copied
+                </>
+              ) : (
+                <>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                  </svg>
+                  Copy link
+                </>
+              )}
+            </button>
           </div>
         </div>
       </main>
