@@ -118,17 +118,32 @@ export default function Projects() {
                   <span className="text-[11px] text-[#777] font-mono tracking-widest">{p.name.slice(0, 2).toUpperCase()}</span>
                 </div>
               )}
-              <a
-                href={p.live}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className={`text-[11px] sm:text-[12px] no-underline border border-[#222] px-3 sm:px-3.5 py-1.5 rounded transition-all duration-200 whitespace-nowrap ${
-                  hovered === p.id ? "text-white border-[#888]" : "text-[#aaa]"
-                }`}
-              >
-                Live ↗
-              </a>
+              <div className="flex flex-row md:flex-col gap-2">
+                <a
+                  href={p.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className={`text-[11px] sm:text-[12px] no-underline border border-[#222] px-3 sm:px-3.5 py-1.5 rounded transition-all duration-200 whitespace-nowrap text-center ${
+                    hovered === p.id ? "text-white border-[#888]" : "text-[#aaa]"
+                  }`}
+                >
+                  Live ↗
+                </a>
+                {p.apk && (
+                  <a
+                    href={p.apk}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className={`text-[11px] sm:text-[12px] no-underline border border-[#222] px-3 sm:px-3.5 py-1.5 rounded transition-all duration-200 whitespace-nowrap text-center ${
+                      hovered === p.id ? "text-white border-[#888]" : "text-[#aaa]"
+                    }`}
+                  >
+                    APK ↓
+                  </a>
+                )}
+              </div>
             </div>
           </motion.div>
         ))}

@@ -10,8 +10,8 @@ const shared = {
   linkedin: "https://linkedin.com/in/adegoke-adeoluwa-579119345",
   twitter: "https://twitter.com/blaqboydee",
   tiktok: "https://tiktok.com/@blaqboydee5",
-  tagline: "I build web apps.",
-  sub: "MERN stack. Available for work.",
+  tagline: "I build web and mobile apps.",
+  sub: "MERN stack · Capacitor. Available for work.",
   currently: "I am currently working on Arena",
   arenaLink: "https://arenagameplay.vercel.app/",
 };
@@ -26,7 +26,7 @@ export const personalByRegion = {
     whatsapp: "+234 913 376 3902",
     about: [
       "I'm a full-stack developer passionate about building interactive, user-first digital experiences. With a balance of frontend design and backend logic, I create applications that are both beautiful and performant.",
-      "I started coding in 2022 with HTML and CSS, took a break to focus on university, and returned fully in 2024. Since then I've built several real-world projects and I'm constantly learning and growing.",
+      "I started coding in 2022 with HTML and CSS, took a break to focus on university, and returned fully in 2024. Since then I've built several real-world projects — and recently started shipping them to mobile with Capacitor, packaging my React apps as native Android apps. I'm constantly learning and growing.",
     ],
   },
   uk: {
@@ -36,7 +36,7 @@ export const personalByRegion = {
     whatsapp: "+44 7763 992972",
     about: [
       "I'm a full-stack developer passionate about building interactive, user-first digital experiences. With a balance of frontend design and backend logic, I create applications that are both beautiful and performant.",
-      "I've been building for the web since 2022 — over three years of hands-on experience spanning freelance client work, instructing, and full-stack product development with the MERN and Next.js stacks. I'm constantly learning and growing.",
+      "I've been building for the web since 2022 — over three years of hands-on experience spanning freelance client work, instructing, and full-stack product development with the MERN and Next.js stacks. Recently I've started shipping to mobile too, packaging my React apps as native Android apps with Capacitor. I'm constantly learning and growing.",
     ],
   },
 } as const;
@@ -45,6 +45,7 @@ export const skills = {
   Frontend: ["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "HTML5", "CSS3", "Framer Motion"],
   Backend: ["Node.js", "Express", "MongoDB", "Socket.io", "Firebase", "Supabase"],
   Tools: ["Git", "Vite", "Vercel"],
+  Mobile: ["Capacitor", "Android (APK builds)"],
   Learning: ["PostgreSQL / SQL", "GraphQL", "React Native"],
 };
 
@@ -63,14 +64,25 @@ export const education = [
   },
 ];
 
-export const projects = [
+export type Project = {
+  id: string;
+  name: string;
+  description: string;
+  tech: string[];
+  live: string;
+  /** Direct APK download (GitHub releases) for projects shipped as Android apps */
+  apk?: string;
+  featured: boolean;
+};
+
+export const projects: Project[] = [
   {
     id: "01",
     name: "Klassroom",
     description:
       "Full-stack classroom management platform where instructors can manage assignments, grade submissions, run timed coding challenges, and monitor student activity through a real-time dashboard. Includes multi-role authentication, late submission detection, email notifications via Resend, and self-enrollment via invite links.",
     tech: ["Next.js", "TypeScript", "MongoDB", "Resend"],
-    live: "https://klassroomapp.vercel.app/",
+    live: "https://klassroom.cv/",
     featured: true,
   },
   {
@@ -86,9 +98,10 @@ export const projects = [
     id: "03",
     name: "Arena",
     description:
-      "Multiplayer gaming hub where players connect, create private rooms, and compete in real-time. Games include Reaction, TicTacToe, Hangman, Wordle Duel, and Connect Four. Built with a full Socket.io backend for live gameplay and match results.",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "Socket.io"],
+      "Multiplayer gaming hub where players connect, create private rooms, and compete in real-time across 9 games — Reaction, Tic Tac Toe, Hangman, Connect Four, Wordle Duel, Memory Duel, Trivia Royale, Bomb Defusal, and Would You Rather. Built with a full Socket.io backend for live gameplay and match results. Also packaged as a native Android app with Capacitor — hardware back-button navigation, adaptive app icon, branded splash screen, and automatic socket reconnection on resume — running against the same live server, so mobile players compete against web players.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "Socket.io", "Capacitor", "Android"],
     live: "https://arenagameplay.vercel.app/",
+    apk: "https://github.com/Blaqboydee/Arena-Frontend/releases/latest",
     featured: true,
   },
   {
@@ -104,9 +117,10 @@ export const projects = [
     id: "05",
     name: "Spendly",
     description:
-      "Financial expense tracker with category breakdowns, data visualization, and persistent storage.",
-    tech: ["React", "Tailwind CSS", "Recharts", "Local Storage"],
+      "Financial expense tracker with category breakdowns, data visualization, and persistent storage. Also packaged as a native Android app with Capacitor — hardware back-button navigation, adaptive app icons, splash screens, and scheduled daily reminders via local notifications.",
+    tech: ["React", "Tailwind CSS", "Recharts", "Capacitor", "Android"],
     live: "https://spendlytracks.vercel.app/",
+    apk: "https://github.com/Blaqboydee/Spendly/releases/latest",
     featured: false,
   },
   {
